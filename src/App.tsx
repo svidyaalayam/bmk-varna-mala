@@ -139,7 +139,11 @@ function App() {
     <main className="app-shell">
       <header className="topbar">
         <div className="brand">
-          <span className="brand-mark">అ</span>
+          <img
+            className="brand-logo"
+            src="BMK_New_Logo.png"
+            alt="బాలముకుందము logo"
+          />
           <div>
             <strong>బాలముకుందము</strong>
             <span>వర్ణమాల</span>

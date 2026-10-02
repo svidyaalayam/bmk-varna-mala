@@ -48,8 +48,15 @@ button:focus-visible { outline: 3px solid #f6c945; outline-offset: 3px; }
   font-family: "Noto Sans Telugu", sans-serif;
   font-size: 22px;
 }
-.brand strong { display: block; font-family:"Noto Sans Telugu",sans-serif; font-size: 1rem; }
-.brand div span { display: block; color: rgba(255,255,255,.65); font-family:"Noto Sans Telugu",sans-serif; font-size: .72rem; }
+.brand-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  background: none;
+  padding: 2px;
+}
+.brand strong { display: block; font-family:"Noto Sans Telugu",sans-serif; font-size: 1.5rem; }
+.brand div span { display: block; color: rgba(255,255,255,.65); font-family:"Noto Sans Telugu",sans-serif; font-size: 1rem; }
 .progress-pill {
   padding: 7px 13px;
   border: 1px solid rgba(255,255,255,.28);
