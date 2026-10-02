@@ -50,7 +50,26 @@ function App() {
   const userName = bmkUser
     ? displayBmkName(bmkUser)
     : handoffName || manualName.trim();
-  const vowelIds = new Set(["a", "aa", "i", "ii"]);
+  const vowelIds = new Set([
+    "a",
+    "aa",
+    "i",
+    "ii",
+    "u",
+    "uu",
+    "ru",
+    "ruu",
+    "lru",
+    "lruu",
+    "e",
+    "ee",
+    "ai",
+    "o",
+    "oo",
+    "au",
+    "am",
+    "ah",
+  ]);
   const vowels = characters.filter((item) => vowelIds.has(item.id));
   const consonants = characters.filter((item) => !vowelIds.has(item.id));
   const categoryLabels = {
