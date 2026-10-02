@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #0f2f28;
+  --bg-soft: #163d34;
+  --panel: #f4f7f5;
+  --ink: #12241f;
+  --muted: #5b6f68;
+  --accent: #1f7a5c;
+  --accent-dark: #145743;
+  --border: #d5e0db;
+  font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, #2a6b55 0%, transparent 40%),
+    linear-gradient(160deg, #0f2f28 0%, #1a463c 45%, #0c241f 100%);
+  min-height: 100vh;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button { font: inherit; }
+button:focus-visible { outline: 3px solid #f6c945; outline-offset: 3px; }
+
+.app-shell { min-height: 100vh; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px max(24px, calc((100vw - 1100px) / 2));
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  color: white;
+  background: rgba(12,36,31,.86);
+  backdrop-filter: blur(10px);
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; }
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  color: white;
+  background: linear-gradient(145deg,#3aa882,#1f7a5c);
+  font-family: "Noto Sans Telugu", sans-serif;
+  font-size: 22px;
+}
+.brand strong { display: block; font-family:"Noto Sans Telugu",sans-serif; font-size: 1rem; }
+.brand div span { display: block; color: rgba(255,255,255,.65); font-family:"Noto Sans Telugu",sans-serif; font-size: .72rem; }
+.progress-pill {
+  padding: 7px 13px;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 999px;
+  color: rgba(255,255,255,.9);
+  background: rgba(255,255,255,.08);
+  font-size: .85rem;
+}
+.progress-pill span { color: #f6c945; }
+.topbar-actions { display:flex; align-items:center; justify-content:flex-end; gap:10px; }
+.language-selector { display:flex; align-items:center; gap:7px; }
+.language-label { color:rgba(255,255,255,.6); font-size:.72rem; }
+.language-options { display:flex; gap:4px; }
+.language-options button { display:flex; align-items:center; gap:5px; padding:6px 9px; border:1px solid rgba(255,255,255,.2); border-radius:8px; color:rgba(255,255,255,.78); background:rgba(255,255,255,.06); cursor:pointer; font-family:inherit; font-size:.78rem; }
+.language-options button span { font-weight:700; }
+.language-options button small { color:rgba(255,255,255,.55); font-size:.65rem; }
+.language-options button:hover:not(:disabled) { border-color:#8fd4ba; background:rgba(255,255,255,.14); }
+.language-options button.selected { border-color:#8fd4ba; color:#fff; background:rgba(31,122,92,.8); }
+.language-options button:disabled { cursor:not-allowed; opacity:.42; }
+.parent-back-button { padding:7px 12px; border:1px solid rgba(255,255,255,.3); border-radius:999px; color:rgba(255,255,255,.9); background:rgba(255,255,255,.08); cursor:pointer; font-size:.8rem; }
+.parent-back-button:hover { color:#fff; background:rgba(255,255,255,.18); }
+
+.welcome {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:32px;
+  width: min(980px, 100%);
+  margin: auto;
+  padding: 38px 24px 30px;
+  color: white;
+}
+.welcome .eyebrow { color: #8fd4ba; }
+.welcome-copy { display:flex; align-items:baseline; flex-wrap:wrap; gap:18px; min-width:0; max-width:none; flex:1; white-space:nowrap; }
+.welcome h1 { max-width:none; margin:0; font-size:clamp(1.8rem,3.5vw,3rem); font-weight:700; line-height:1.05; letter-spacing:-.04em; }
+.welcome-greeting { display:inline; margin-right:7px; color:rgba(255,255,255,.78); font-size:.46em; font-weight:600; letter-spacing:.01em; }
+.welcome-name { display:inline; max-width:100%; overflow-wrap:anywhere; font-size:.46em; font-weight:600; }
+.intro { max-width:none; margin:0; color:rgba(255,255,255,.78); font-size:.9rem; line-height:1.45; }
+.manual-name-field { display:flex; align-items:center; gap:10px; flex:0 0 100%; width:min(390px,100%); margin-top:0; padding:5px 7px 5px 10px; border:1px solid rgba(143,212,186,.25); border-radius:10px; color:rgba(255,255,255,.82); background:rgba(255,255,255,.06); font-size:.8rem; font-weight:600; }
+.manual-name-field span { flex:0 0 auto; }
+.manual-name-field em { color:rgba(255,255,255,.55); font-size:.75rem; font-style:normal; font-weight:400; }
+.manual-name-field input { width:100%; min-width:0; padding:8px 10px; border:1px solid rgba(143,212,186,.5); border-radius:7px; outline:none; color:var(--ink); background:rgba(255,255,255,.95); font:inherit; }
+.manual-name-field input:focus { border-color:#f6c945; box-shadow:0 0 0 3px rgba(246,201,69,.2); }
+.welcome-art { position:relative; display:grid; place-items:center; flex:0 0 120px; width:120px; height:120px; border:1px solid rgba(143,212,186,.35); border-radius:34px; background:linear-gradient(145deg,rgba(58,168,130,.48),rgba(20,87,67,.28)); box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 16px 30px rgba(0,0,0,.16); transform:rotate(4deg); }
+.welcome-art-letter { color:#fff; font-family:"Noto Sans Telugu",sans-serif; font-size:6rem; line-height:1; text-shadow:0 7px 0 rgba(12,36,31,.2); transform:rotate(-4deg); }
+.welcome-art-spark { position:absolute; color:#f6c945; font-size:1.3rem; }
+.spark-one { top:20px; right:20px; }
+.spark-two { bottom:25px; left:20px; font-size:.85rem; }
+.sun-decoration { display:none; }
+.eyebrow { margin: 0 0 4px; color: var(--accent-dark); font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+h2,h3,p { margin-top: 0; }
+h2 { margin-bottom: 0; }
+
+.lesson-picker,.lesson-area {
+  width: min(1100px, calc(100% - 48px));
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: 0 14px 34px rgba(0,0,0,.18);
+}
+.lesson-picker { padding: 22px; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.section-heading.compact { margin-bottom: 16px; }
+.section-heading h2 { color: var(--ink); font-size: 1.55rem; }
+.set-label { padding: 4px 10px; border-radius: 999px; color: var(--accent-dark); background: #dff3ea; font-size: .78rem; font-weight: 700; }
+.letter-sessions { display:grid; gap:10px; }
+.letter-session { overflow:hidden; border:1px solid var(--border); border-radius:10px; background:#fbfcfb; }
+.letter-session summary { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 14px; color:var(--ink); cursor:pointer; list-style:none; user-select:none; }
+.letter-session summary::-webkit-details-marker { display:none; }
+.letter-session summary > span:first-child { display:flex; align-items:baseline; gap:9px; }
+.letter-session summary strong { color:var(--accent-dark); font-family:"Noto Sans Telugu","Noto Sans Devanagari","Noto Sans Kannada","Noto Sans Tamil",sans-serif; font-size:1.15rem; }
+.letter-session summary small { color:var(--muted); font-size:.78rem; font-weight:600; }
+.letter-session[open] summary { border-bottom:1px solid var(--border); background:#f2f8f4; }
+.session-chevron { color:var(--accent); font-size:1.2rem; transition:transform .2s; }
+.letter-session[open] .session-chevron { transform:rotate(180deg); }
+.letter-session .character-grid { padding:12px; }
+.character-grid { display:grid; grid-template-columns:repeat(10,1fr); gap:9px; }
+.character-card {
+  min-width: 0;
+  padding: 10px 4px 8px;
+  border: 2px solid #d5e0db;
+  border-radius: 12px;
+  color: var(--ink);
+  background: #fff;
+  cursor: pointer;
+  transition: .2s;
+}
+.character-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.character-card.selected { border-color: var(--accent); background: #dff3ea; box-shadow: 0 0 0 3px rgba(31,122,92,.12); }
+.character-glyph { display: block; font-family: "Noto Sans Telugu",sans-serif; font-size: 30px; line-height: 1.2; }
+.character-name { display: block; color: var(--muted); font-size: 12px; }
+
+.lesson-area { margin-top: 18px; padding: 22px; }
+.lesson-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.letter-title { display: flex; align-items: center; gap: 12px; }
+.big-glyph { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 14px; color: var(--accent-dark); background: #dff3ea; font-family:"Noto Sans Telugu",sans-serif; font-size: 42px; }
+.letter-title h2 { font-size: 1.8rem; }
+.pronunciation { margin: 4px 0 0; color: var(--muted); font-size: .9rem; }
+.mode-switcher { display: flex; flex-wrap: wrap; gap: 8px; }
+.mode-switcher button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--ink);
+  background: #e7efeb;
+  cursor: pointer;
+  font-size: .92rem;
+}
+.mode-switcher button.active { color: white; background: var(--accent); }
+.word-examples { width:min(1100px,calc(100% - 48px)); margin:18px auto 0; padding:22px; border:1px solid var(--border); border-radius:16px; background:var(--panel); box-shadow:0 14px 34px rgba(0,0,0,.16); }
+.word-examples-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.word-examples-heading h2 { color:var(--ink); font-size:1.25rem; }
+.word-examples-script { color:var(--accent-dark); font-family:"Noto Sans Telugu",sans-serif; font-size:1.35rem; font-weight:700; }
+.word-example-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.word-example-card { min-width:0; padding:10px; border:1px solid var(--border); border-radius:10px; background:#fbfcfb; text-align:center; }
+.word-example-image { display:grid; place-items:center; height:90px; border-radius:8px; background:linear-gradient(145deg,#e8f5ef,#d5e9e0); }
+.word-example-image span { font-size:3.2rem; filter:drop-shadow(0 4px 3px rgba(18,36,31,.12)); }
+.word-example-card h3 { margin:8px 0 0; color:var(--accent-dark); font-family:"Noto Sans Telugu",sans-serif; font-size:1.2rem; }
+.word-example-card p { margin:0; color:var(--muted); font-size:.75rem; }
+.worksheet-link { display:block; margin:15px 0 0 auto; padding:8px 12px; border:1px solid var(--accent); border-radius:8px; color:var(--accent-dark); background:#fff; cursor:pointer; font-size:.84rem; font-weight:700; }
+.worksheet-link:hover { color:#fff; background:var(--accent); }
+.letter-navigation { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); }
+.letter-navigation > span { color:var(--muted); font-size:.8rem; font-weight:700; }
+
+.learn-grid,.trace-layout { display: grid; grid-template-columns: 260px 1fr; gap: 16px; padding-top: 20px; }
+.fact-card,.demo-card,.trace-card,.trace-side { border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+.fact-card { display: flex; flex-direction: column; padding: 20px; }
+.fact-card .eyebrow { color: var(--accent-dark); }
+.example-word { margin: 16px 0 23px; font-family:"Noto Sans Telugu",sans-serif; font-size: 25px; }
+.tip { margin-top: auto; color: var(--muted); font-size: .9rem; }
+.primary-button,.secondary-button,.next-button {
+  border-radius: 10px;
+  padding: 11px 14px;
+  border: 0;
+  font-weight: 700;
+  cursor: pointer;
+}
+.primary-button { color: white; background: var(--accent); }
+.primary-button:hover { background: var(--accent-dark); }
+.primary-button span { float: right; }
+.secondary-button { color: var(--accent-dark); border: 1px solid var(--border); background: #fff; }
+.secondary-button:hover { background: #eef3f1; }
+.secondary-button:disabled { opacity:.45; cursor:not-allowed; }
+.secondary-button:disabled:hover { background:#fff; }
+.demo-card,.trace-card { min-width: 0; padding: 18px; }
+.demo-card .eyebrow,.trace-card .eyebrow { color: var(--accent-dark); }
+.demo-controls { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:7px; }
+.stroke-demo { height: 270px; margin: 10px auto 0; }
+.speed-control { display:grid; gap:2px; width:min(165px,100%); margin:0; color:var(--muted); font-size:.7rem; }
+.speed-control strong { color:var(--accent-dark); }
+.speed-control input { width:100%; accent-color:var(--accent); cursor:pointer; }
+.speed-labels { display:flex; justify-content:space-between; color:#8a9a93; font-size:.64rem; }
+.color-picker { display:flex; align-items:center; gap:7px; margin-top:10px; color:var(--muted); font-size:.7rem; }
+.color-swatch { width:18px; height:18px; padding:0; border:2px solid transparent; border-radius:50%; cursor:pointer; box-shadow:0 1px 2px rgba(18,36,31,.2); }
+.color-swatch:hover,.color-swatch.selected { border-color:#fff; outline:2px solid var(--ink); }
+.stroke-demo svg,.tracing-surface svg { width: 100%; height: 100%; overflow: visible; }
+.demo-guide { fill:none; stroke:#edf2ef; stroke-width:29; stroke-linecap:round; stroke-linejoin:round; }
+.demo-stroke { fill:none; stroke:var(--accent); stroke-width:15; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:none; stroke-dashoffset:0; }
+.demo-stroke.is-playing { stroke-dasharray:1; stroke-dashoffset:1; animation:draw linear both; }
+.stroke-number { fill:#f6c945; }
+.stroke-number-text { fill:#12241f; font-size:13px; font-weight:700; text-anchor:middle; dominant-baseline:central; }
+.writing-pen { pointer-events:none; }
+.pencil-body { fill:#f6c945; stroke:#9a6c16; stroke-width:1.5; }
+.pencil-tip { fill:#e8c29b; stroke:#9a6c16; stroke-width:1.5; stroke-linejoin:round; }
+.pencil-lead { fill:#37453f; }
+.pencil-highlight { fill:none; stroke:#fff7c7; stroke-width:2; stroke-linecap:round; opacity:.9; }
+.pencil-band { fill:#ef8f9b; stroke:#a94e5e; stroke-width:1.5; }
+.celebration { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border-radius:10px; color:#145743; background:rgba(223,243,234,.94); animation:celebrate-in .35s ease-out both; pointer-events:none; }
+.celebration-stars { color:#f0b82e; font-size:2.1rem; letter-spacing:12px; animation:celebrate-stars .8s ease-in-out infinite alternate; }
+.celebration strong { font-size:2rem; }
+.celebration > span:last-child { color:#5b6f68; font-size:.95rem; }
+.stroke-list { display:flex; gap:8px; padding:0; margin:5px 0 0; list-style:none; color:#9aaba4; font-size:12px; }
+.stroke-list li { display:flex; align-items:center; gap:5px; }
+.stroke-list span { display:grid; place-items:center; width:21px; height:21px; border-radius:50%; background:#dfe8e4; }
+.stroke-list li.is-visible { color:var(--accent-dark); }
+.stroke-list li.is-visible span { color:#fff; background:var(--accent); }
+
+.trace-layout { grid-template-columns: 1fr 220px; }
+.tracing-surface { position:relative; height:390px; margin:7px 0 8px; border-radius:10px; background: repeating-linear-gradient(0deg,transparent 0,transparent 101px,#eef3f1 102px),#fff; touch-action:none; }
+.trace-guide,.trace-path { fill:none; stroke:#cbd8d2; stroke-width:31; stroke-linecap:round; stroke-linejoin:round; }
+.trace-path { stroke:#e2ebe7; }
+.completed-stroke .trace-path { stroke:#b8dfca; }
+.start-dot { fill:#f6c945; stroke:#fff; stroke-width:4; animation:pulse 1.2s infinite; }
+.arrow { fill:none; stroke:#799187; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; }
+.child-stroke { fill:none; stroke:var(--accent); stroke-width:12; stroke-linecap:round; stroke-linejoin:round; }
+.current-stroke { stroke:#ef8f2b; }
+.trace-message { min-height:23px; margin:0; color:var(--accent-dark); font-size:.9rem; font-weight:600; }
+.trace-actions { display:flex; gap:7px; }
+.text-button { padding: 7px 10px; border:1px solid var(--border); border-radius:8px; color:var(--ink); background:#fff; cursor:pointer; font-size:.82rem; }
+.text-button:hover { border-color:var(--accent); color:var(--accent-dark); }
+.text-button:disabled { opacity:.4; cursor:not-allowed; }
+.progress-dots { display:flex; justify-content:center; gap:8px; }
+.progress-dots span { width:9px; height:9px; border-radius:50%; background:#cbd8d2; }
+.progress-dots span.done { background:#1f9d63; }
+.trace-side { padding:20px; }
+.mini-character { margin:10px 0; color:var(--accent); font-family:"Noto Sans Telugu",sans-serif; font-size:74px; line-height:1; }
+.trace-side h3 { margin:0 0 8px; }
+.trace-side p:not(.eyebrow) { color:var(--muted); font-size:.9rem; line-height:1.45; }
+.homework-choice { display:flex; gap:8px; margin:14px 0 12px; }
+.homework-choice button { flex:1; padding:8px 5px; border:1px solid var(--border); border-radius:8px; color:var(--ink); background:#fff; cursor:pointer; font-size:.82rem; }
+.homework-choice button.selected { border-color:var(--accent); color:#fff; background:var(--accent); }
+.homework-input { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:14px 0 12px; color:var(--muted); font-size:.84rem; font-weight:600; }
+.homework-input input { width:76px; padding:8px 9px; border:1px solid var(--border); border-radius:8px; color:var(--ink); background:#fff; font:inherit; text-align:center; }
+.homework-input input:focus { border-color:var(--accent); outline:2px solid rgba(31,122,92,.14); }
+.homework-count { padding:10px; border-radius:8px; color:var(--accent-dark); background:#dff3ea; font-size:.88rem; text-align:center; }
+.full-width { width:100%; margin-top:18px; }
+.certificate-page { width:100%; }
+.certificate-actions { display:flex; justify-content:space-between; gap:12px; margin-bottom:18px; }
+.worksheet { padding:30px; border:8px double #b8d5c8; border-radius:8px; background:#fff; box-shadow:0 14px 34px rgba(0,0,0,.12); }
+.worksheet-header { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding-bottom:20px; border-bottom:2px dashed #b8d5c8; }
+.worksheet-kicker { margin:0 0 5px; color:var(--accent-dark); font-family:"Noto Sans Telugu",sans-serif; font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.worksheet h1 { margin:0 0 5px; color:var(--ink); font-size:clamp(1.7rem,4vw,2.5rem); }
+.worksheet-header p:not(.worksheet-kicker) { margin:0; color:var(--muted); }
+.worksheet-badge { display:grid; place-items:center; width:68px; height:68px; border:3px solid #f6c945; border-radius:50%; color:#f0b82e; font-size:30px; font-weight:800; transform:rotate(8deg); }
+.worksheet-badge span { margin-top:-8px; font-size:.65rem; }
+.worksheet-letter { display:flex; align-items:center; gap:15px; margin:22px 0; padding:13px 17px; border-radius:10px; background:#f4f8f5; }
+.worksheet-glyph { color:var(--accent); font-family:"Noto Sans Telugu",sans-serif; font-size:58px; line-height:1; }
+.worksheet-letter h2 { color:var(--ink); }
+.worksheet-letter p:last-child { margin:3px 0 0; color:var(--muted); }
+.attempt-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+.attempt-cell { position:relative; min-width:0; aspect-ratio:1/1; border:1px solid #d5e0db; border-radius:8px; background:repeating-linear-gradient(0deg,transparent 0,transparent 48%,#edf3ef 49%,transparent 50%); }
+.attempt-number { position:absolute; top:5px; left:7px; z-index:1; color:var(--accent-dark); font-size:.72rem; font-weight:800; }
+.attempt-cell svg { width:100%; height:100%; }
+.worksheet-guide { fill:none; stroke:#e8efeb; stroke-width:31; stroke-linecap:round; stroke-linejoin:round; }
+.worksheet-trace { fill:none; stroke:var(--accent); stroke-width:12; stroke-linecap:round; stroke-linejoin:round; }
+.worksheet-footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; margin-top:25px; padding-top:14px; border-top:1px solid #d5e0db; color:var(--muted); font-size:.78rem; }
+.printable-page { min-height:100vh; padding:24px; background:#f4f7f5; }
+.printable-actions { display:flex; justify-content:space-between; gap:12px; width:min(960px,100%); margin:0 auto 18px; }
+.printable-sheet { width:min(960px,100%); margin:0 auto; padding:30px; border:8px double #b8d5c8; border-radius:8px; background:#fff; box-shadow:0 14px 34px rgba(0,0,0,.12); }
+.printable-header { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; padding-bottom:16px; border-bottom:2px dashed #b8d5c8; }
+.printable-header h1 { margin:0 0 5px; color:var(--ink); font-size:clamp(1.7rem,4vw,2.5rem); }
+.printable-header p:not(.worksheet-kicker) { margin:0; color:var(--muted); }
+.printable-glyph { color:var(--accent); font-family:"Noto Sans Telugu",sans-serif; font-size:76px; line-height:1; }
+.printable-student-line { margin:18px 0; color:var(--muted); font-size:.9rem; }
+.practice-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.practice-cell { position:relative; min-width:0; aspect-ratio:1.25/1; overflow:hidden; border:1px solid #d5e0db; border-radius:8px; background:#fff; }
+.practice-number { position:absolute; top:5px; left:7px; z-index:1; color:#9aaba4; font-size:.72rem; }
+.practice-cell svg { width:100%; height:100%; }
+.practice-line { stroke:#c9ddd2; stroke-width:1.5; }
+.practice-guide { fill:none; stroke:#91b8a6; stroke-width:6; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:2 8; }
+.printable-footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; margin-top:20px; padding-top:12px; border-top:1px solid #d5e0db; color:var(--muted); font-size:.8rem; }
+.printable-footer strong { color:var(--accent-dark); }
+footer { width:min(1100px,calc(100% - 48px)); margin:0 auto; padding:18px 24px 28px; color:rgba(255,255,255,.65); text-align:center; font-size:.9rem; }
+footer span { color:#8fd4ba; }
+.next-button { margin-left:18px; padding:8px 12px; color:white; background:var(--accent); font-size:.82rem; }
+.next-button:hover { background:var(--accent-dark); }
+@keyframes draw { from { opacity:1; stroke-dashoffset:1; } to { opacity:1; stroke-dashoffset:0; } }
+@keyframes pulse { 50% { transform:scale(1.25); transform-origin:center; } }
+@keyframes celebrate-in { from { opacity:0; transform:scale(.82); } to { opacity:1; transform:scale(1); } }
+@keyframes celebrate-stars { from { transform:scale(.9) rotate(-4deg); } to { transform:scale(1.1) rotate(4deg); } }
+
+@media (max-width:800px) {
+  .character-grid { grid-template-columns:repeat(5,1fr); }
+  .learn-grid,.trace-layout { grid-template-columns:1fr; }
+  .trace-side { text-align:center; }
+  .trace-side .full-width { max-width:260px; }
+}
+@media (max-width:520px) {
+  .topbar { padding:12px 16px; }
+  .progress-pill { padding:6px 9px; font-size:.75rem; }
+  .topbar-actions { gap:6px; }
+  .parent-back-button { padding:6px 8px; font-size:.7rem; }
+  .language-label { display:none; }
+  .language-options button { padding:5px 6px; }
+  .language-options button small { display:none; }
+  .welcome { padding:32px 24px 24px; }
+  .welcome-copy { align-items:flex-start; flex-direction:column; gap:8px; white-space:normal; }
+  .welcome h1 { font-size:2.2rem; }
+  .intro { font-size:.95rem; }
+  .manual-name-field { display:grid; gap:4px; padding:7px 9px 9px; }
+  .welcome-art { flex-basis:90px; width:90px; height:90px; border-radius:26px; }
+  .welcome-art-letter { font-size:3.8rem; }
+  .lesson-picker,.lesson-area { width:calc(100% - 24px); }
+  .lesson-header { align-items:flex-start; flex-direction:column; }
+  .mode-switcher { width:100%; }
+  .mode-switcher button { flex:1; }
+  .word-example-grid { grid-template-columns:repeat(2,1fr); }
+  .section-heading { align-items:flex-start; flex-direction:column; }
+  .section-heading .secondary-button { align-self:flex-end; margin-top:-42px; }
+  .stroke-demo { height:220px; }
+  .tracing-surface { height:280px; }
+  .next-button { display:block; margin:12px auto 0; }
+  .certificate-actions { align-items:stretch; flex-direction:column; }
+  .certificate-actions button { width:100%; }
+  .worksheet { padding:16px; }
+  .attempt-grid { grid-template-columns:repeat(2,1fr); }
+  .worksheet-footer { flex-direction:column; }
+  .printable-page { padding:12px; }
+  .printable-sheet { padding:16px; }
+  .printable-header { gap:8px; }
+  .printable-glyph { font-size:56px; }
+}
+@media print {
+  body { background:#fff; }
+  .topbar,.welcome,.lesson-picker,.lesson-header,.certificate-actions,footer,.printable-actions { display:none !important; }
+  .lesson-area { width:100%; margin:0; padding:0; border:0; box-shadow:none; }
+  .worksheet,.printable-sheet { box-shadow:none; }
+  .printable-page { padding:0; background:#fff; }
+  .printable-sheet { width:100%; border-width:5px; }
+}
