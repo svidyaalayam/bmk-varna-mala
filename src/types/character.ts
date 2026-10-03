@@ -16,4 +16,6 @@ export type CharacterLesson = {
   tip: string
   strokes: Stroke[]
   writingBounds?: { minY: number; maxY: number }
+  pdfUrl?: string
+  audioUrl?: string
 }

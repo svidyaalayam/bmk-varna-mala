@@ -48,15 +48,8 @@ button:focus-visible { outline: 3px solid #f6c945; outline-offset: 3px; }
   font-family: "Noto Sans Telugu", sans-serif;
   font-size: 22px;
 }
-.brand-logo {
-  width: 72px;
-  height: 72px;
-  border-radius: 10px;
-  background: none;
-  padding: 2px;
-}
-.brand strong { display: block; font-family:"Noto Sans Telugu",sans-serif; font-size: 1.5rem; }
-.brand div span { display: block; color: rgba(255,255,255,.65); font-family:"Noto Sans Telugu",sans-serif; font-size: 1rem; }
+.brand strong { display: block; font-family:"Noto Sans Telugu",sans-serif; font-size: 1rem; }
+.brand div span { display: block; color: rgba(255,255,255,.65); font-family:"Noto Sans Telugu",sans-serif; font-size: .72rem; }
 .progress-pill {
   padding: 7px 13px;
   border: 1px solid rgba(255,255,255,.28);
@@ -93,7 +86,7 @@ button:focus-visible { outline: 3px solid #f6c945; outline-offset: 3px; }
 .welcome-copy { display:flex; align-items:baseline; flex-wrap:wrap; gap:18px; min-width:0; max-width:none; flex:1; white-space:nowrap; }
 .welcome h1 { max-width:none; margin:0; font-size:clamp(1.8rem,3.5vw,3rem); font-weight:700; line-height:1.05; letter-spacing:-.04em; }
 .welcome-greeting { display:inline; margin-right:7px; color:rgba(255,255,255,.78); font-size:.46em; font-weight:600; letter-spacing:.01em; }
-.welcome-name { display:inline; max-width:100%; overflow-wrap:anywhere; font-size:.46em; font-weight:600; }
+.welcome-name { display:inline; max-width:100%; color:rgba(255,255,255,.78); font-size:.46em; font-weight:600; letter-spacing:.01em; overflow-wrap:anywhere; }
 .intro { max-width:none; margin:0; color:rgba(255,255,255,.78); font-size:.9rem; line-height:1.45; }
 .manual-name-field { display:flex; align-items:center; gap:10px; flex:0 0 100%; width:min(390px,100%); margin-top:0; padding:5px 7px 5px 10px; border:1px solid rgba(143,212,186,.25); border-radius:10px; color:rgba(255,255,255,.82); background:rgba(255,255,255,.06); font-size:.8rem; font-weight:600; }
 .manual-name-field span { flex:0 0 auto; }
@@ -172,22 +165,40 @@ h2 { margin-bottom: 0; }
 .word-examples-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
 .word-examples-heading h2 { color:var(--ink); font-size:1.25rem; }
 .word-examples-script { color:var(--accent-dark); font-family:"Noto Sans Telugu",sans-serif; font-size:1.35rem; font-weight:700; }
+.word-examples-controls { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:-2px 0 10px; color:var(--muted); font-size:.78rem; font-weight:700; }
+.word-examples-controls > div { display:flex; gap:6px; }
+.word-examples-arrow { display:grid; place-items:center; width:30px; height:30px; border:1px solid var(--border); border-radius:50%; color:var(--accent-dark); background:#fff; cursor:pointer; font-size:1.05rem; line-height:1; }
+.word-examples-arrow:hover:not(:disabled) { color:#fff; background:var(--accent); border-color:var(--accent); }
+.word-examples-arrow:disabled { opacity:.35; cursor:not-allowed; }
 .word-example-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
 .word-example-card { min-width:0; padding:10px; border:1px solid var(--border); border-radius:10px; background:#fbfcfb; text-align:center; }
 .word-example-image { display:grid; place-items:center; height:90px; border-radius:8px; background:linear-gradient(145deg,#e8f5ef,#d5e9e0); }
 .word-example-image span { font-size:3.2rem; filter:drop-shadow(0 4px 3px rgba(18,36,31,.12)); }
 .word-example-card h3 { margin:8px 0 0; color:var(--accent-dark); font-family:"Noto Sans Telugu",sans-serif; font-size:1.2rem; }
 .word-example-card p { margin:0; color:var(--muted); font-size:.75rem; }
-.worksheet-link { display:block; margin:15px 0 0 auto; padding:8px 12px; border:1px solid var(--accent); border-radius:8px; color:var(--accent-dark); background:#fff; cursor:pointer; font-size:.84rem; font-weight:700; }
+.worksheet-controls { display:flex; align-items:center; justify-content:flex-end; gap:12px; margin-top:15px; }
+.worksheet-size { display:flex; align-items:end; gap:6px; color:var(--muted); font-size:.72rem; font-weight:700; }
+.worksheet-size label { display:grid; gap:3px; }
+.worksheet-size input { width:42px; padding:7px 5px; border:1px solid var(--border); border-radius:7px; color:var(--ink); background:#fff; font:inherit; text-align:center; }
+.worksheet-size-x { padding-bottom:7px; color:var(--accent-dark); font-size:1rem; }
+.worksheet-link { display:block; padding:8px 12px; border:1px solid var(--accent); border-radius:8px; color:var(--accent-dark); background:#fff; cursor:pointer; font-size:.84rem; font-weight:700; }
 .worksheet-link:hover { color:#fff; background:var(--accent); }
 .letter-navigation { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); }
 .letter-navigation > span { color:var(--muted); font-size:.8rem; font-weight:700; }
+.pdf-preview { margin-top:20px; padding-top:20px; border-top:1px solid var(--border); }
+.pdf-preview-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.pdf-preview-heading h2 { color:var(--ink); font-size:1.25rem; }
+.pdf-open-link { color:var(--accent-dark); font-size:.82rem; font-weight:700; }
+.pdf-open-link:hover { color:var(--accent); }
+.pdf-frame { display:block; width:100%; height:520px; border:1px solid var(--border); border-radius:10px; background:#fff; }
 
 .learn-grid,.trace-layout { display: grid; grid-template-columns: 260px 1fr; gap: 16px; padding-top: 20px; }
 .fact-card,.demo-card,.trace-card,.trace-side { border: 1px solid var(--border); border-radius: 12px; background: #fff; }
 .fact-card { display: flex; flex-direction: column; padding: 20px; }
 .fact-card .eyebrow { color: var(--accent-dark); }
 .example-word { margin: 16px 0 23px; font-family:"Noto Sans Telugu",sans-serif; font-size: 25px; }
+.pronunciation-button { display:inline-flex; align-items:center; gap:6px; margin-bottom:18px; padding:7px 10px; border:1px solid var(--border); border-radius:999px; color:var(--accent-dark); background:#fff; cursor:pointer; font-size:.8rem; font-weight:700; }
+.pronunciation-button:hover { border-color:var(--accent); background:#eef8f3; }
 .tip { margin-top: auto; color: var(--muted); font-size: .9rem; }
 .primary-button,.secondary-button,.next-button {
   border-radius: 10px;
@@ -332,10 +343,15 @@ footer span { color:#8fd4ba; }
   .welcome-art { flex-basis:90px; width:90px; height:90px; border-radius:26px; }
   .welcome-art-letter { font-size:3.8rem; }
   .lesson-picker,.lesson-area { width:calc(100% - 24px); }
+  .worksheet-controls { align-items:stretch; flex-direction:column; }
+  .worksheet-size { justify-content:center; }
+  .worksheet-link { width:100%; }
   .lesson-header { align-items:flex-start; flex-direction:column; }
   .mode-switcher { width:100%; }
   .mode-switcher button { flex:1; }
   .word-example-grid { grid-template-columns:repeat(2,1fr); }
+  .pdf-preview-heading { align-items:flex-start; flex-direction:column; }
+  .pdf-frame { height:420px; }
   .section-heading { align-items:flex-start; flex-direction:column; }
   .section-heading .secondary-button { align-self:flex-end; margin-top:-42px; }
   .stroke-demo { height:220px; }

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Stroke } from '../types/character'
+import { getHorizontalFit } from '../utils/fitStrokes'
 
 type StrokeDemoProps = {
   strokes: Stroke[]
@@ -16,6 +17,7 @@ const strokeColors = [
 ]
 
 export function StrokeDemo({ strokes, playing, onPlayingChange }: StrokeDemoProps) {
+  const horizontalFit = getHorizontalFit(strokes)
   const [visibleCount, setVisibleCount] = useState(playing ? 0 : strokes.length)
   const [durationSeconds, setDurationSeconds] = useState(7)
   const [strokeColor, setStrokeColor] = useState(strokeColors[0].value)
@@ -119,30 +121,32 @@ export function StrokeDemo({ strokes, playing, onPlayingChange }: StrokeDemoProp
       <div className="stroke-demo" aria-label="Animated stroke order demonstration">
         <svg viewBox="0 0 500 420" role="img">
           <title>Stroke order demonstration</title>
-          <path className="demo-guide" d={strokes.map((item) => item.path).join(' ')} />
-          {strokes.slice(0, visibleCount).map((item) => (
-            <g key={item.id}>
-              <path
-                key={`${item.id}-${playing ? 'playing' : 'shown'}`}
-                className={playing ? 'demo-stroke is-playing' : 'demo-stroke'}
-                d={item.path}
-                pathLength="1"
-                ref={item.id === activeStroke?.id ? activePathRef : undefined}
-                style={playing ? { stroke: strokeColor, animationDuration: `${(durationSeconds * 1000) / strokes.length}ms` } : { stroke: strokeColor }}
-              />
-            </g>
-          ))}
-          {activeStroke && (
-            <g className="writing-pen" transform={`translate(${penPosition.x} ${penPosition.y})`} aria-label="Moving writing pen">
-              <g className="pencil" transform="rotate(35)">
-                <path className="pencil-tip" d="M -7 -7 L 0 0 L 7 -7 Z" />
-                <path className="pencil-lead" d="M -2 -4 L 0 0 L 2 -4 Z" />
-                <rect className="pencil-body" x="-7" y="-37" width="14" height="30" rx="3" />
-                <path className="pencil-highlight" d="M -3 -34 L -3 -10" />
-                <rect className="pencil-band" x="-7" y="-44" width="14" height="7" rx="2" />
+          <g transform={`translate(${horizontalFit.offsetX} ${horizontalFit.offsetY}) scale(${horizontalFit.scale})`}>
+            <path className="demo-guide" d={strokes.map((item) => item.path).join(' ')} />
+            {strokes.slice(0, visibleCount).map((item) => (
+              <g key={item.id}>
+                <path
+                  key={`${item.id}-${playing ? 'playing' : 'shown'}`}
+                  className={playing ? 'demo-stroke is-playing' : 'demo-stroke'}
+                  d={item.path}
+                  pathLength="1"
+                  ref={item.id === activeStroke?.id ? activePathRef : undefined}
+                  style={playing ? { stroke: strokeColor, animationDuration: `${(durationSeconds * 1000) / strokes.length}ms` } : { stroke: strokeColor }}
+                />
               </g>
-            </g>
-          )}
+            ))}
+            {activeStroke && (
+              <g className="writing-pen" transform={`translate(${penPosition.x} ${penPosition.y})`} aria-label="Moving writing pen">
+                <g className="pencil" transform="rotate(35)">
+                  <path className="pencil-tip" d="M -7 -7 L 0 0 L 7 -7 Z" />
+                  <path className="pencil-lead" d="M -2 -4 L 0 0 L 2 -4 Z" />
+                  <rect className="pencil-body" x="-7" y="-37" width="14" height="30" rx="3" />
+                  <path className="pencil-highlight" d="M -3 -34 L -3 -10" />
+                  <rect className="pencil-band" x="-7" y="-44" width="14" height="7" rx="2" />
+                </g>
+              </g>
+            )}
+          </g>
         </svg>
       </div>
     </div>

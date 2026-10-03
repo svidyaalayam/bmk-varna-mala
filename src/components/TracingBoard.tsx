@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import type { PointerEvent } from 'react'
 import type { CharacterLesson } from '../types/character'
 import type { TraceAttempt, TracePoint } from '../types/trace'
+import { getHorizontalFit } from '../utils/fitStrokes'
 
 export type Point = TracePoint
 
@@ -15,6 +16,7 @@ const closestDistance = (point: Point, points: Point[]) =>
   Math.min(...points.map((candidate) => distance(point, candidate)))
 
 export function TracingBoard({ lesson, onComplete }: TracingBoardProps) {
+  const horizontalFit = getHorizontalFit(lesson.strokes)
   const [drawnStrokes, setDrawnStrokes] = useState<Point[][]>([])
   const [currentStroke, setCurrentStroke] = useState<Point[]>([])
   const [cursorPoint, setCursorPoint] = useState<Point | null>(null)
@@ -32,7 +34,10 @@ export function TracingBoard({ lesson, onComplete }: TracingBoardProps) {
 
     const screenPoint = new DOMPoint(event.clientX, event.clientY)
     const svgPoint = screenPoint.matrixTransform(transform.inverse())
-    return { x: svgPoint.x, y: svgPoint.y }
+    return {
+      x: (svgPoint.x - horizontalFit.offsetX) / horizontalFit.scale,
+      y: (svgPoint.y - horizontalFit.offsetY) / horizontalFit.scale,
+    }
   }
 
   const startDrawing = (event: PointerEvent<SVGSVGElement>) => {
@@ -131,39 +136,41 @@ export function TracingBoard({ lesson, onComplete }: TracingBoardProps) {
           onPointerUp={finishDrawing}
           onPointerCancel={finishDrawing}
         >
-          <path className="trace-guide" d={lesson.strokes.map((item) => item.path).join(' ')} />
-          {lesson.strokes.map((item, index) => (
-            <g key={item.id} className={index < drawnStrokes.length ? 'completed-stroke' : ''}>
-              <path className="trace-path" d={item.path} />
-              {index === drawnStrokes.length && (
-                <>
-                  <circle className="start-dot" cx={item.start.x} cy={item.start.y} r="13" />
-                  <path className="arrow" d={`M ${item.end.x - 10} ${item.end.y - 8} L ${item.end.x} ${item.end.y} L ${item.end.x - 10} ${item.end.y + 8}`} />
-                </>
-              )}
-            </g>
-          ))}
-          {drawnStrokes.map((points, index) => (
-            <polyline className="child-stroke" key={`drawn-${index}`} points={points.map((point) => `${point.x},${point.y}`).join(' ')} />
-          ))}
-          {currentStroke.length > 1 && (
-            <polyline className="child-stroke current-stroke" points={currentStroke.map((point) => `${point.x},${point.y}`).join(' ')} />
-          )}
-          {active && cursorPoint && (
-            <g
-              className="writing-pen trace-pencil"
-              transform={`translate(${cursorPoint.x} ${cursorPoint.y})`}
-              aria-label="Tracing pencil"
-            >
-              <g className="pencil" transform="rotate(35)">
-                <path className="pencil-tip" d="M -7 -7 L 0 0 L 7 -7 Z" />
-                <path className="pencil-lead" d="M -2 -4 L 0 0 L 2 -4 Z" />
-                <rect className="pencil-body" x="-7" y="-37" width="14" height="30" rx="3" />
-                <path className="pencil-highlight" d="M -3 -34 L -3 -10" />
-                <rect className="pencil-band" x="-7" y="-44" width="14" height="7" rx="2" />
+          <g transform={`translate(${horizontalFit.offsetX} ${horizontalFit.offsetY}) scale(${horizontalFit.scale})`}>
+            <path className="trace-guide" d={lesson.strokes.map((item) => item.path).join(' ')} />
+            {lesson.strokes.map((item, index) => (
+              <g key={item.id} className={index < drawnStrokes.length ? 'completed-stroke' : ''}>
+                <path className="trace-path" d={item.path} />
+                {index === drawnStrokes.length && (
+                  <>
+                    <circle className="start-dot" cx={item.start.x} cy={item.start.y} r="13" />
+                    <path className="arrow" d={`M ${item.end.x - 10} ${item.end.y - 8} L ${item.end.x} ${item.end.y} L ${item.end.x - 10} ${item.end.y + 8}`} />
+                  </>
+                )}
               </g>
-            </g>
-          )}
+            ))}
+            {drawnStrokes.map((points, index) => (
+              <polyline className="child-stroke" key={`drawn-${index}`} points={points.map((point) => `${point.x},${point.y}`).join(' ')} />
+            ))}
+            {currentStroke.length > 1 && (
+              <polyline className="child-stroke current-stroke" points={currentStroke.map((point) => `${point.x},${point.y}`).join(' ')} />
+            )}
+            {active && cursorPoint && (
+              <g
+                className="writing-pen trace-pencil"
+                transform={`translate(${cursorPoint.x} ${cursorPoint.y})`}
+                aria-label="Tracing pencil"
+              >
+                <g className="pencil" transform="rotate(35)">
+                  <path className="pencil-tip" d="M -7 -7 L 0 0 L 7 -7 Z" />
+                  <path className="pencil-lead" d="M -2 -4 L 0 0 L 2 -4 Z" />
+                  <rect className="pencil-body" x="-7" y="-37" width="14" height="30" rx="3" />
+                  <path className="pencil-highlight" d="M -3 -34 L -3 -10" />
+                  <rect className="pencil-band" x="-7" y="-44" width="14" height="7" rx="2" />
+                </g>
+              </g>
+            )}
+          </g>
         </svg>
         {celebrating && (
           <div className="celebration" role="status" aria-live="polite">
