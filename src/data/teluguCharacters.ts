@@ -3,14 +3,6 @@ import { strokesFromCoordinateArrays } from './coordinateStrokes'
 
 // These friendly, simplified paths are intentionally kept as data. Replace them
 // with educator-reviewed handwriting paths as the lesson library grows.
-const stroke = (
-  id: string,
-  path: string,
-  label: string,
-  start: { x: number; y: number },
-  end: { x: number; y: number },
-) => ({ id, path, label, start, end })
-
 export const teluguCharacters: CharacterLesson[] = [
   {
     id: 'a',
